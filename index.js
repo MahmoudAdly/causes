@@ -2,6 +2,19 @@ var restify = require('restify');
 const fs = require('fs');
 var request = require('request');
 
+const templates = [
+  {
+    id: 1,
+    title: 'Flickr',
+    thumb: '/public/templates/flickr-thumb.jpg'
+  },
+  {
+    id: 2,
+    title: 'Facebook',
+    thumb: '/public/templates/facebook-thumb.jpg'
+  }
+];
+
 function download(url, filename, callback) {
     var photoStream = fs.createWriteStream(filename);
     var r = request(url).pipe(photoStream);
@@ -26,6 +39,7 @@ function getFbPicUrl(id, callback) {
     }
   });
 }
+
 var server = restify.createServer();
 
 server.get('/', function (req, res, next) {
@@ -61,10 +75,21 @@ server.get('/fbpic/:id', function (req, res, next) {
   });
 });
 
+server.get('/templates', function (req, res, next) {
+  res.send({
+    data: templates
+  });
+  next();
+});
+
 // server.get('/', function (req, res, next) {
 //   res.send('hello');
 //   next();
 // });
+
+server.get(/\/public\/?.*/, restify.serveStatic({
+    directory: __dirname
+}));
 
 server.listen(3000, function() {
   console.log('%s listening at %s', server.name, server.url);
