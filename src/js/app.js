@@ -6,8 +6,7 @@ var FacebookAuth = React.createClass({
   getInitialState: function() {
     return {
       loggedIn: false,
-      fbName: '',
-      fbId: 0
+      fbName: ''
     }
   },
 
@@ -36,13 +35,8 @@ var FacebookAuth = React.createClass({
 
   getUserData: function() {
     FB.api('/me', function(response) {
-      this.setState({
-        loggedIn: true,
-        fbName: response.name,
-        fbId: response.id
-      }, function() {
-        this.props.onUserAuthenticated(this.state.fbId);
-      });
+      this.setState({ loggedIn: true, fbName: response.name });
+      this.props.onUserAuthenticated(response.id);
     }.bind(this));
   },
 
@@ -63,7 +57,9 @@ var FacebookAuth = React.createClass({
   },
 
   handleClick: function() {
-    FB.login(this.checkLoginState());
+    FB.login(function() {
+      this.checkLoginState();
+    }.bind(this));
   },
 
   render: function() {
@@ -71,7 +67,7 @@ var FacebookAuth = React.createClass({
       <div className="facebook-auth">
         {(
           this.state.loggedIn ? <span>Welcome {this.state.fbName}</span>
-            : <a href="#" onClick={this.handleClick}>Please login first</a>
+            : <a href="javascript:;" onClick={this.handleClick}>Please login first</a>
         )}
       </div>
     );
@@ -91,7 +87,7 @@ var TemplateSelect = React.createClass({
 
   componentDidMount: function() {
     $.ajax({
-      url: '/templates',
+      url: '/causes/templates/all',
       dataType: 'json',
       cache: false,
       success: function(response) {
@@ -104,11 +100,7 @@ var TemplateSelect = React.createClass({
   },
 
   onSelectionChanged: function (e) {
-    this.setState({
-      templateId: e.currentTarget.value
-    }, function() {
-      this.props.onTemplateSelected(this.state.templateId);
-    });
+    this.props.onTemplateSelected(e.currentTarget.value);
   },
 
   render: function() {
@@ -119,6 +111,7 @@ var TemplateSelect = React.createClass({
               <span key={idx}>
                 <input type="radio" name="template"
                   value={template.id} onChange={this.onSelectionChanged} />
+                <img src={template.photo} style={{maxWidth:'48px'}}/>
                 {template.title}
               </span>
             );
@@ -146,30 +139,48 @@ var Result = React.createClass({
 var CausesView = React.createClass({
   getInitialState: function() {
     return {
-      fbId: 0,
-      templateId: 0
+      fbId: null,
+      templateId: null
     }
   },
 
   onUserAuthenticated: function(fbId) {
     this.setState({ fbId: fbId });
-    console.log(fbId);
   },
 
   onTemplateSelected: function(templateId) {
     this.setState({ templateId: templateId });
-    console.log(templateId);
+  },
+
+  onSubmit: function(e) {
+    var requestUrl = '/causes/templates/' + this.state.templateId
+      + '/fbId/' + this.state.fbId;
+    $.ajax({
+      url: requestUrl,
+      method: 'post',
+      dataType: 'json',
+      cache: false,
+      success: function(response) {
+        this.setState({photoUrl: response.data.photoUrl});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+      }.bind(this)
+    });
   },
 
   render: function() {
     return (
       <div className="causes-view">
-        <FacebookAuth onUserAuthenticated={this.onUserAuthenticated}/>
-        <hr />
+        <FacebookAuth onUserAuthenticated={this.onUserAuthenticated} />
+        <hr/>
         <TemplateSelect onTemplateSelected={this.onTemplateSelected} />
-        <hr />
+        <input type="submit" value="Create" onClick={this.onSubmit}
+          disabled={!this.state.fbId || !this.state.templateId} />
+        <hr/>
         <Result />
       </div>
     );
   }
+
 });

@@ -10,8 +10,7 @@ var FacebookAuth = React.createClass({
   getInitialState: function getInitialState() {
     return {
       loggedIn: false,
-      fbName: '',
-      fbId: 0
+      fbName: ''
     };
   },
 
@@ -41,13 +40,8 @@ var FacebookAuth = React.createClass({
 
   getUserData: function getUserData() {
     FB.api('/me', function (response) {
-      this.setState({
-        loggedIn: true,
-        fbName: response.name,
-        fbId: response.id
-      }, function () {
-        this.props.onUserAuthenticated(this.state.fbId);
-      });
+      this.setState({ loggedIn: true, fbName: response.name });
+      this.props.onUserAuthenticated(response.id);
     }.bind(this));
   },
 
@@ -68,7 +62,9 @@ var FacebookAuth = React.createClass({
   },
 
   handleClick: function handleClick() {
-    FB.login(this.checkLoginState());
+    FB.login(function () {
+      this.checkLoginState();
+    }.bind(this));
   },
 
   render: function render() {
@@ -82,7 +78,7 @@ var FacebookAuth = React.createClass({
         this.state.fbName
       ) : React.createElement(
         'a',
-        { href: '#', onClick: this.handleClick },
+        { href: 'javascript:;', onClick: this.handleClick },
         'Please login first'
       )
     );
@@ -104,7 +100,7 @@ var TemplateSelect = React.createClass({
 
   componentDidMount: function componentDidMount() {
     $.ajax({
-      url: '/templates',
+      url: '/causes/templates/all',
       dataType: 'json',
       cache: false,
       success: function (response) {
@@ -117,11 +113,7 @@ var TemplateSelect = React.createClass({
   },
 
   onSelectionChanged: function onSelectionChanged(e) {
-    this.setState({
-      templateId: e.currentTarget.value
-    }, function () {
-      this.props.onTemplateSelected(this.state.templateId);
-    });
+    this.props.onTemplateSelected(e.currentTarget.value);
   },
 
   render: function render() {
@@ -134,6 +126,7 @@ var TemplateSelect = React.createClass({
           { key: idx },
           React.createElement('input', { type: 'radio', name: 'template',
             value: template.id, onChange: this.onSelectionChanged }),
+          React.createElement('img', { src: template.photo, style: { maxWidth: '48px' } }),
           template.title
         );
       }.bind(this))
@@ -161,19 +154,33 @@ var CausesView = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      fbId: 0,
-      templateId: 0
+      fbId: null,
+      templateId: null
     };
   },
 
   onUserAuthenticated: function onUserAuthenticated(fbId) {
     this.setState({ fbId: fbId });
-    console.log(fbId);
   },
 
   onTemplateSelected: function onTemplateSelected(templateId) {
     this.setState({ templateId: templateId });
-    console.log(templateId);
+  },
+
+  onSubmit: function onSubmit(e) {
+    var requestUrl = '/causes/templates/' + this.state.templateId + '/fbId/' + this.state.fbId;
+    $.ajax({
+      url: requestUrl,
+      method: 'post',
+      dataType: 'json',
+      cache: false,
+      success: function (response) {
+        this.setState({ photoUrl: response.data.photoUrl });
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.log(err);
+      }.bind(this)
+    });
   },
 
   render: function render() {
@@ -183,8 +190,11 @@ var CausesView = React.createClass({
       React.createElement(FacebookAuth, { onUserAuthenticated: this.onUserAuthenticated }),
       React.createElement('hr', null),
       React.createElement(TemplateSelect, { onTemplateSelected: this.onTemplateSelected }),
+      React.createElement('input', { type: 'submit', value: 'Create', onClick: this.onSubmit,
+        disabled: !this.state.fbId || !this.state.templateId }),
       React.createElement('hr', null),
       React.createElement(Result, null)
     );
   }
+
 });
