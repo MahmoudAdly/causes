@@ -6,21 +6,27 @@ var Jimp = require('jimp');
 const templates = [
   {
     id: 1,
-    title: 'Flickr',
-    photo: '/public/templates/flickr-thumb.jpg',
-    thumb: '/public/templates/flickr-thumb.jpg'
+    title: 'Palestine Flag',
+    photo: '/public/templates/flag-palestine.png',
+    thumb: '/public/templates/flag-palestine-thumb.png'
   },
   {
     id: 2,
-    title: 'Facebook',
-    photo: '/public/templates/facebook-thumb.png',
-    thumb: '/public/templates/facebook-thumb.png'
+    title: 'Syria Flag',
+    photo: '/public/templates/flag-syria.png',
+    thumb: '/public/templates/flag-syria-thumb.png'
   },
   {
     id: 3,
-    title: 'Confederate',
-    photo: '/public/templates/confederate.png',
-    thumb: '/public/templates/confederate.png'
+    title: 'Save Madaya EN',
+    photo: '/public/templates/save-madaya-en.png',
+    thumb: '/public/templates/save-madaya-en-thumb.png'
+  },
+  {
+    id: 4,
+    title: 'Save Madaya AR',
+    photo: '/public/templates/save-madaya-ar.png',
+    thumb: '/public/templates/save-madaya-ar-thumb.png'
   }
 ];
 

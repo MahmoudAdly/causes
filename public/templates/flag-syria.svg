@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="flag-syria.svg"
+   inkscape:export-filename="C:\Users\G\Desktop\causes\flag-syria-thumb.png"
+   inkscape:export-xdpi="22.5"
+   inkscape:export-ydpi="22.5">
+  <metadata
+     id="metadata19">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs17" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     id="namedview15"
+     showgrid="false"
+     inkscape:zoom="0.34222222"
+     inkscape:cx="450"
+     inkscape:cy="300"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g4237"
+     style="opacity:1">
+    <g
+       transform="matrix(0.66666667,0,0,1,-1.6507936e-5,0)"
+       id="g4209"
+       style="">
+      <rect
+         width="1536"
+         height="1024"
+         id="rect4"
+         x="-4.9523809e-005"
+         y="-2.0141559e-005"
+         style="" />
+      <rect
+         width="1536"
+         height="682.66669"
+         id="rect6"
+         x="-4.9523809e-005"
+         y="-2.0141559e-005"
+         style="fill:#ffffff" />
+      <rect
+         width="1536"
+         height="341.33334"
+         id="rect8"
+         x="-4.9523809e-005"
+         y="-2.0141559e-005"
+         style="fill:#007a3d" />
+    </g>
+    <g
+       transform="translate(-6.162518,4.2666299)"
+       id="g4214"
+       style="">
+      <path
+         id="Star"
+         d="m 518.1623,392.53335 74.85884,230.4 -195.98507,-142.39454 242.25281,0 -195.98507,142.39454 z"
+         inkscape:connector-curvature="0"
+         style="fill:#ce1126" />
+      <use
+         x="225"
+         xlink:href="#Star"
+         id="use11"
+         transform="translate(94.967529,0)"
+         y="0"
+         width="100%"
+         height="100%"
+         style="" />
+      <use
+         x="-225"
+         xlink:href="#Star"
+         id="use13"
+         transform="translate(-94.967537,0)"
+         y="0"
+         width="100%"
+         height="100%"
+         style="" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   viewBox="0 0 1024 1024"
+   id="svg4136"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="save-madaya-en.svg"
+   inkscape:export-filename="C:\Users\G\Desktop\causes\save-madaya-en-thumb.png"
+   inkscape:export-xdpi="22.5"
+   inkscape:export-ydpi="22.5">
+  <defs
+     id="defs4138">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4891">
+      <stop
+         style="stop-color:#333333;stop-opacity:1;"
+         offset="0"
+         id="stop4893" />
+      <stop
+         style="stop-color:#333333;stop-opacity:0;"
+         offset="1"
+         id="stop4895" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4891"
+       id="linearGradient4897"
+       x1="529.71429"
+       y1="1046.6479"
+       x2="529.71429"
+       y2="710.97327"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,1.0081967,0,-8.6259182)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.54296875"
+     inkscape:cx="230.21583"
+     inkscape:cy="512"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4141">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-28.362138)">
+    <rect
+       style="opacity:1;fill:url(#linearGradient4897);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4827"
+       width="1024"
+       height="351.42856"
+       x="0"
+       y="700.93365" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4864"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.30000305px;line-height:141.99999571%;font-family:AlArabiya;-inkscape-font-specification:'AlArabiya, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(0.80825076,0,0,0.80825076,9.1364104,840.68134)"><flowRegion
+         id="flowRegion4866"><rect
+           id="rect4868"
+           width="8864.4844"
+           height="2201.4448"
+           x="-2.5032504"
+           y="-29.309931"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180.30000305px;line-height:141.99999571%;font-family:AlArabiya;-inkscape-font-specification:'AlArabiya, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#f9f9f9" /></flowRegion><flowPara
+         id="flowPara4144">#Save_Madaya</flowPara></flowRoot>  </g>
+</svg>

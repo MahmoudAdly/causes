@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 2.56 2.56"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="flag-palestine.svg"
+   inkscape:export-filename="C:\Users\G\Desktop\causes\flag-palestine-thumb.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="0.25666667"
+     inkscape:cx="17.532475"
+     inkscape:cy="300"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <rect
+     width="2.5599999"
+     height="2.5599999"
+     id="rect4"
+     x="5.1719784e-010"
+     y="1.2667716e-007"
+     style="opacity:1;fill:#007a3d" />
+  <rect
+     width="2.5599999"
+     height="1.7066666"
+     id="rect6"
+     x="5.1719784e-010"
+     y="1.2667716e-007"
+     style="opacity:1;fill:#ffffff" />
+  <rect
+     width="2.5599999"
+     height="0.85333329"
+     id="rect8"
+     x="5.1719784e-010"
+     y="1.2667716e-007"
+     style="opacity:1" />
+  <path
+     d="M 0,-1.2001731e-8 0.85333332,1.2799999 0,2.5599999 Z"
+     id="path10"
+     inkscape:connector-curvature="0"
+     style="opacity:1;fill:#ce1126" />
+</svg>
