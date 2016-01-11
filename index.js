@@ -7,17 +7,20 @@ const templates = [
   {
     id: 1,
     title: 'Flickr',
-    photo: '/public/templates/flickr-thumb.jpg'
+    photo: '/public/templates/flickr-thumb.jpg',
+    thumb: '/public/templates/flickr-thumb.jpg'
   },
   {
     id: 2,
     title: 'Facebook',
-    photo: '/public/templates/facebook-thumb.png'
+    photo: '/public/templates/facebook-thumb.png',
+    thumb: '/public/templates/facebook-thumb.png'
   },
   {
     id: 3,
     title: 'Confederate',
-    photo: '/public/templates/confederate.png'
+    photo: '/public/templates/confederate.png',
+    thumb: '/public/templates/confederate.png'
   }
 ];
 
