@@ -70,16 +70,46 @@ var FacebookAuth = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'facebook-auth' },
-      this.state.loggedIn ? React.createElement(
-        'span',
-        null,
-        'Welcome ',
-        this.state.fbName
-      ) : React.createElement(
-        'a',
-        { href: 'javascript:;', onClick: this.handleClick },
-        'Please login first'
+      { className: 'facebook-auth mdl-cell mdl-cell--12-col' },
+      React.createElement(
+        'div',
+        { className: 'fb-card-wide mdl-card mdl-shadow--2dp' },
+        React.createElement(
+          'div',
+          { className: 'mdl-card__title' },
+          React.createElement(
+            'h2',
+            { className: 'mdl-card__title-text' },
+            'Welcome',
+            this.state.loggedIn ? React.createElement(
+              'span',
+              null,
+              ', ',
+              this.state.fbName,
+              '!'
+            ) : false
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'mdl-card__supporting-text' },
+          'Please login with your Facebook account to load your profile picture. Be sure we store no data about you.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'mdl-card__actions mdl-card--border' },
+          this.state.loggedIn ? React.createElement(
+            'i',
+            { className: 'material-icons md-36 green' },
+            'check_circle'
+          ) : React.createElement(
+            'a',
+            {
+              className: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect',
+              href: 'javascript:;', onClick: this.handleClick },
+            'Login'
+          )
+        )
       )
     );
   }
@@ -119,7 +149,7 @@ var TemplateSelect = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'template-select' },
+      { className: 'template-select mdl-cell mdl-cell--12-col' },
       this.state.templates.map(function (template, idx) {
         return React.createElement(
           'span',
@@ -186,12 +216,17 @@ var CausesView = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'causes-view' },
+      { className: 'causes-view mdl-grid' },
       React.createElement(FacebookAuth, { onUserAuthenticated: this.onUserAuthenticated }),
       React.createElement('hr', null),
       React.createElement(TemplateSelect, { onTemplateSelected: this.onTemplateSelected }),
-      React.createElement('input', { type: 'submit', value: 'Create', onClick: this.onSubmit,
-        disabled: !this.state.fbId || !this.state.templateId }),
+      React.createElement(
+        'button',
+        { type: 'submit', onClick: this.onSubmit,
+          className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent',
+          disabled: !this.state.fbId || !this.state.templateId },
+        'Create'
+      ),
       React.createElement('hr', null),
       React.createElement(Result, null)
     );

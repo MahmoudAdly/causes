@@ -64,11 +64,31 @@ var FacebookAuth = React.createClass({
 
   render: function() {
     return (
-      <div className="facebook-auth">
-        {(
-          this.state.loggedIn ? <span>Welcome {this.state.fbName}</span>
-            : <a href="javascript:;" onClick={this.handleClick}>Please login first</a>
-        )}
+      <div className="facebook-auth mdl-cell mdl-cell--12-col">
+        <div className="fb-card-wide mdl-card mdl-shadow--2dp">
+          <div className="mdl-card__title">
+            <h2 className="mdl-card__title-text">
+              Welcome
+              {(
+                this.state.loggedIn ? <span>, {this.state.fbName}!</span> : false
+              )}
+            </h2>
+          </div>
+          <div className="mdl-card__supporting-text">
+            Please login with your Facebook account to load your profile picture.
+            Be sure we store no data about you.
+          </div>
+          <div className="mdl-card__actions mdl-card--border">
+            {(
+              this.state.loggedIn ? <i className="material-icons md-36 green">check_circle</i> :
+                <a
+                  className="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                  href="javascript:;" onClick={this.handleClick}>
+                  Login
+                </a>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
@@ -105,7 +125,7 @@ var TemplateSelect = React.createClass({
 
   render: function() {
     return (
-      <div className="template-select">
+      <div className="template-select mdl-cell mdl-cell--12-col">
         { this.state.templates.map(function(template, idx) {
             return(
               <span key={idx}>
@@ -171,12 +191,13 @@ var CausesView = React.createClass({
 
   render: function() {
     return (
-      <div className="causes-view">
+      <div className="causes-view mdl-grid">
         <FacebookAuth onUserAuthenticated={this.onUserAuthenticated} />
         <hr/>
         <TemplateSelect onTemplateSelected={this.onTemplateSelected} />
-        <input type="submit" value="Create" onClick={this.onSubmit}
-          disabled={!this.state.fbId || !this.state.templateId} />
+        <button type="submit" onClick={this.onSubmit}
+          className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+          disabled={!this.state.fbId || !this.state.templateId}>Create</button>
         <hr/>
         <Result />
       </div>
