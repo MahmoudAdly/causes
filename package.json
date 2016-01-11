@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "node_modules/.bin/nodemon index.js",
-    "babel": "node_modules/.bin/babel --presets es2015,react --watch ./src/js --out-dir ./public/js"
+    "babel": "node_modules/.bin/babel --presets es2015,react --watch ./src/js --out-dir ./public/js",
+    "sass": "sass --scss --style compressed --sourcemap=none --watch $(pwd)/src/scss:$(pwd)/public/css"
   },
   "author": "",
   "license": "ISC",
