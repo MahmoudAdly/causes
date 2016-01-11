@@ -1,18 +1,69 @@
 .material-icons.green {
   color: #00ff00;
 }
-.fb-card-wide.mdl-card {
-  width: 100%;
+.material-icons {
+  &.md-18 { font-size: 18px; }
+  &.md-24 { font-size: 24px; }
+  &.md-36 { font-size: 36px; }
+  &.md-48 { font-size: 48px; }
 }
-.fb-card-wide > .mdl-card__title {
-  color: #fff;
-  background-color: #3b5998;
-  height: 200px;
-  background-image: url("/public/img/facebook-logo-white.png");
-  background-size: 150px 150px;
-  background-position: 100% -30%;
-  background-repeat: no-repeat;
+.fb-card-wide {
+  &.mdl-card {
+    width: 100%;
+  }
+
+  > .mdl-card__title {
+    color: #fff;
+    background-color: #3b5998;
+    height: 200px;
+    background-image: url("/public/img/facebook-logo-white.png");
+    background-size: 150px 150px;
+    background-position: 100% -30%;
+    background-repeat: no-repeat;
+  }
+
+  > .mdl-card__menu {
+    color: #fff;
+  }
 }
-.fb-card-wide > .mdl-card__menu {
-  color: #fff;
+.template-card-image {
+  &.mdl-card{
+    width: 256px;
+    height: 256px;
+  }
+  > .mdl-card__actions {
+    height: 52px;
+    padding: 16px;
+    background-color: #333;
+  }
+  .template-card-image__filename {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+.submit-btn-container {
+  text-align: center;
+}
+.result-container {
+  text-align: center;
+  .result-card-image {
+    &.mdl-card {
+      width: 256px;
+      height: 256px;
+    }
+    .mdl-card__actions {
+      height: 52px;
+      // padding: 16px;
+      background-color: #333;
+    }
+  }
+  .result-card-image__filename {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .download {
+    vertical-align: middle;
+  }
 }

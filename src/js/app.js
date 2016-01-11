@@ -63,6 +63,15 @@ var FacebookAuth = React.createClass({
   },
 
   render: function() {
+    var welcomeMsg;
+    if(this.state.fbName) {
+      welcomeMsg = <p>You are now ready for the next step.
+        Choose one of the templates below and click 'Create' to create a
+        download link for your new profile picture.</p>
+    } else {
+      welcomeMsg = <p>Please login with your Facebook account to load your profile picture.
+        Be sure we store no data about you.</p>;
+    }
     return (
       <div className="facebook-auth mdl-cell mdl-cell--12-col">
         <div className="fb-card-wide mdl-card mdl-shadow--2dp">
@@ -75,8 +84,7 @@ var FacebookAuth = React.createClass({
             </h2>
           </div>
           <div className="mdl-card__supporting-text">
-            Please login with your Facebook account to load your profile picture.
-            Be sure we store no data about you.
+            {welcomeMsg}
           </div>
           <div className="mdl-card__actions mdl-card--border">
             {(
@@ -126,31 +134,30 @@ var TemplateSelect = React.createClass({
   render: function() {
     return (
       <div className="template-select mdl-cell mdl-cell--12-col">
-        { this.state.templates.map(function(template, idx) {
-            return(
-              <span key={idx}>
-                <input type="radio" name="template"
-                  value={template.id} onChange={this.onSelectionChanged} />
-                <img src={template.photo} style={{maxWidth:'48px'}}/>
-                {template.title}
-              </span>
-            );
-          }.bind(this))}
-      </div>
-    );
-  }
-});
-
-var Result = React.createClass({
-  getInitialState: function() {
-    return {
-
-    }
-  },
-  render: function() {
-    return (
-      <div className="result">
-        result
+        <div className="mdl-grid">
+          { this.state.templates.map(function(template, idx) {
+              var imageStyle = {
+                background: "url('" + template.thumb + "') center / cover"
+              };
+              return(
+                <div key={idx}
+                  className="template-card-image mdl-card mdl-shadow--2dp \
+                  mdl-cell mdl-cell--3-col">
+                  <div className="mdl-card__title mdl-card--expand"
+                    style={imageStyle}></div>
+                    <div className="mdl-card__actions">
+                    <span className="template-card-image__filename">
+                      <input type="radio" name="template"
+                        value={template.id} id={"template"+template.id}
+                        onChange={this.onSelectionChanged}/>
+                        <label htmlFor={"template"+template.id}>{template.title}</label>
+                    </span>
+                  </div>
+                </div>
+              );
+            }.bind(this))
+          }
+        </div>
       </div>
     );
   }
@@ -160,7 +167,9 @@ var CausesView = React.createClass({
   getInitialState: function() {
     return {
       fbId: null,
-      templateId: null
+      templateId: null,
+      resultPhoto: null,
+      loading: false
     }
   },
 
@@ -173,6 +182,11 @@ var CausesView = React.createClass({
   },
 
   onSubmit: function(e) {
+    this.setState({
+      loading: true,
+      resultPhoto: null
+    });
+
     var requestUrl = '/causes/templates/' + this.state.templateId
       + '/fbId/' + this.state.fbId;
     $.ajax({
@@ -181,25 +195,73 @@ var CausesView = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(response) {
-        this.setState({photoUrl: response.data.photoUrl});
+        this.setState({
+          resultPhoto: response.data.url,
+          loading: false
+        });
       }.bind(this),
       error: function(xhr, status, err) {
         console.log(err);
+        this.setState({ loading: false });
       }.bind(this)
     });
   },
 
+  componentDidUpdate: function() {
+    // This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
+    componentHandler.upgradeDom();
+  },
+
   render: function() {
+    var result, loadingClass;
+
+    if (this.state.resultPhoto) {
+      var imageStyle = {
+        background: "url('" + this.state.resultPhoto + "') center / cover"
+      }
+      result =
+        <div>
+          <div className="result-card-image mdl-card mdl-shadow--2dp">
+            <div className="mdl-card__title mdl-card--expand" style={imageStyle}></div>
+            <div className="mdl-card__actions">
+              <span className="result-card-image__filename">
+                Download
+                <a href={this.state.resultPhoto} download>
+                  <i className="material-icons md-36 download">file_download</i>
+                </a>
+              </span>
+            </div>
+          </div>
+          <br/>
+          * Download link will expire after one hour.
+        </div>;
+    }
+
+    if(this.state.loading) {
+      loadingClass = 'is-active is-upgraded';
+    } else {
+      loadingClass = '';
+    }
+
     return (
       <div className="causes-view mdl-grid">
         <FacebookAuth onUserAuthenticated={this.onUserAuthenticated} />
-        <hr/>
+
         <TemplateSelect onTemplateSelected={this.onTemplateSelected} />
-        <button type="submit" onClick={this.onSubmit}
-          className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-          disabled={!this.state.fbId || !this.state.templateId}>Create</button>
-        <hr/>
-        <Result />
+
+        <div className="submit-btn-container mdl-cell mdl-cell--12-col">
+          <button type="submit" onClick={this.onSubmit}
+            className="mdl-button mdl-js-button mdl-button--raised \
+            mdl-js-ripple-effect mdl-button--accent mdl-cell"
+            disabled={!this.state.fbId || !this.state.templateId || this.state.loading}>
+            Create
+          </button>
+        </div>
+
+        <div className="result-container mdl-grid">
+          <div className={"mdl-spinner mdl-js-spinner "+ loadingClass}></div>
+          {result}
+        </div>
       </div>
     );
   }

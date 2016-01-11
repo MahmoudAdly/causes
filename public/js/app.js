@@ -68,6 +68,20 @@ var FacebookAuth = React.createClass({
   },
 
   render: function render() {
+    var welcomeMsg;
+    if (this.state.fbName) {
+      welcomeMsg = React.createElement(
+        'p',
+        null,
+        'You are now ready for the next step. Choose one of the templates below and click \'Create\' to create a download link for your new profile picture.'
+      );
+    } else {
+      welcomeMsg = React.createElement(
+        'p',
+        null,
+        'Please login with your Facebook account to load your profile picture. Be sure we store no data about you.'
+      );
+    }
     return React.createElement(
       'div',
       { className: 'facebook-auth mdl-cell mdl-cell--12-col' },
@@ -93,7 +107,7 @@ var FacebookAuth = React.createClass({
         React.createElement(
           'div',
           { className: 'mdl-card__supporting-text' },
-          'Please login with your Facebook account to load your profile picture. Be sure we store no data about you.'
+          welcomeMsg
         ),
         React.createElement(
           'div',
@@ -150,31 +164,38 @@ var TemplateSelect = React.createClass({
     return React.createElement(
       'div',
       { className: 'template-select mdl-cell mdl-cell--12-col' },
-      this.state.templates.map(function (template, idx) {
-        return React.createElement(
-          'span',
-          { key: idx },
-          React.createElement('input', { type: 'radio', name: 'template',
-            value: template.id, onChange: this.onSelectionChanged }),
-          React.createElement('img', { src: template.photo, style: { maxWidth: '48px' } }),
-          template.title
-        );
-      }.bind(this))
-    );
-  }
-});
-
-var Result = React.createClass({
-  displayName: 'Result',
-
-  getInitialState: function getInitialState() {
-    return {};
-  },
-  render: function render() {
-    return React.createElement(
-      'div',
-      { className: 'result' },
-      'result'
+      React.createElement(
+        'div',
+        { className: 'mdl-grid' },
+        this.state.templates.map(function (template, idx) {
+          var imageStyle = {
+            background: "url('" + template.thumb + "') center / cover"
+          };
+          return React.createElement(
+            'div',
+            { key: idx,
+              className: 'template-card-image mdl-card mdl-shadow--2dp \\ mdl-cell mdl-cell--3-col' },
+            React.createElement('div', { className: 'mdl-card__title mdl-card--expand',
+              style: imageStyle }),
+            React.createElement(
+              'div',
+              { className: 'mdl-card__actions' },
+              React.createElement(
+                'span',
+                { className: 'template-card-image__filename' },
+                React.createElement('input', { type: 'radio', name: 'template',
+                  value: template.id, id: "template" + template.id,
+                  onChange: this.onSelectionChanged }),
+                React.createElement(
+                  'label',
+                  { htmlFor: "template" + template.id },
+                  template.title
+                )
+              )
+            )
+          );
+        }.bind(this))
+      )
     );
   }
 });
@@ -185,7 +206,9 @@ var CausesView = React.createClass({
   getInitialState: function getInitialState() {
     return {
       fbId: null,
-      templateId: null
+      templateId: null,
+      resultPhoto: null,
+      loading: false
     };
   },
 
@@ -198,6 +221,11 @@ var CausesView = React.createClass({
   },
 
   onSubmit: function onSubmit(e) {
+    this.setState({
+      loading: true,
+      resultPhoto: null
+    });
+
     var requestUrl = '/causes/templates/' + this.state.templateId + '/fbId/' + this.state.fbId;
     $.ajax({
       url: requestUrl,
@@ -205,30 +233,89 @@ var CausesView = React.createClass({
       dataType: 'json',
       cache: false,
       success: function (response) {
-        this.setState({ photoUrl: response.data.photoUrl });
+        this.setState({
+          resultPhoto: response.data.url,
+          loading: false
+        });
       }.bind(this),
       error: function (xhr, status, err) {
         console.log(err);
+        this.setState({ loading: false });
       }.bind(this)
     });
   },
 
+  componentDidUpdate: function componentDidUpdate() {
+    // This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
+    componentHandler.upgradeDom();
+  },
+
   render: function render() {
+    var result, loadingClass;
+
+    if (this.state.resultPhoto) {
+      var imageStyle = {
+        background: "url('" + this.state.resultPhoto + "') center / cover"
+      };
+      result = React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          { className: 'result-card-image mdl-card mdl-shadow--2dp' },
+          React.createElement('div', { className: 'mdl-card__title mdl-card--expand', style: imageStyle }),
+          React.createElement(
+            'div',
+            { className: 'mdl-card__actions' },
+            React.createElement(
+              'span',
+              { className: 'result-card-image__filename' },
+              'Download',
+              React.createElement(
+                'a',
+                { href: this.state.resultPhoto, download: true },
+                React.createElement(
+                  'i',
+                  { className: 'material-icons md-36 download' },
+                  'file_download'
+                )
+              )
+            )
+          )
+        ),
+        React.createElement('br', null),
+        '* Download link will expire after one hour.'
+      );
+    }
+
+    if (this.state.loading) {
+      loadingClass = 'is-active is-upgraded';
+    } else {
+      loadingClass = '';
+    }
+
     return React.createElement(
       'div',
       { className: 'causes-view mdl-grid' },
       React.createElement(FacebookAuth, { onUserAuthenticated: this.onUserAuthenticated }),
-      React.createElement('hr', null),
       React.createElement(TemplateSelect, { onTemplateSelected: this.onTemplateSelected }),
       React.createElement(
-        'button',
-        { type: 'submit', onClick: this.onSubmit,
-          className: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent',
-          disabled: !this.state.fbId || !this.state.templateId },
-        'Create'
+        'div',
+        { className: 'submit-btn-container mdl-cell mdl-cell--12-col' },
+        React.createElement(
+          'button',
+          { type: 'submit', onClick: this.onSubmit,
+            className: 'mdl-button mdl-js-button mdl-button--raised \\ mdl-js-ripple-effect mdl-button--accent mdl-cell',
+            disabled: !this.state.fbId || !this.state.templateId || this.state.loading },
+          'Create'
+        )
       ),
-      React.createElement('hr', null),
-      React.createElement(Result, null)
+      React.createElement(
+        'div',
+        { className: 'result-container mdl-grid' },
+        React.createElement('div', { className: "mdl-spinner mdl-js-spinner " + loadingClass }),
+        result
+      )
     );
   }
 
