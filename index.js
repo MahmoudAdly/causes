@@ -97,14 +97,6 @@ function mergePhotos(bottomPhotoPath, topPhotoPath, outputPath, callback) {
 var server = restify.createServer();
 
 server.get('/', function (req, res, next) {
-  res.setHeader('Content-Type', 'text/html');
-  res.writeHead(200);
-  res.end('Under construction. For now, please visit '
-    + '<a href="/causes">Causes page</a>');
-  next();
-});
-
-server.get('/causes', function (req, res, next) {
   fs.readFile(__dirname + '/public/index.html', function (err, data) {
     if (err) {
       next(err);
@@ -118,14 +110,14 @@ server.get('/causes', function (req, res, next) {
   });
 });
 
-server.get('/causes/templates/all', function (req, res, next) {
+server.get('/templates/all', function (req, res, next) {
   res.send({
     data: templates
   });
   next();
 });
 
-server.post('/causes/templates/:templateId/fbId/:fbId', function (req, res, next) {
+server.post('/templates/:templateId/fbId/:fbId', function (req, res, next) {
   var fbId = req.params.fbId;
   var originalFilename = __dirname + '/public/photos/' + fbId + '.jpg';
   var templateId = req.params.templateId;
@@ -164,11 +156,6 @@ server.post('/causes/templates/:templateId/fbId/:fbId', function (req, res, next
 
   });
 });
-
-// server.get('/', function (req, res, next) {
-//   res.send('hello');
-//   next();
-// });
 
 server.get(/\/public\/?.*/, restify.serveStatic({
     directory: __dirname

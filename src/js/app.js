@@ -115,7 +115,7 @@ var TemplateSelect = React.createClass({
 
   componentDidMount: function() {
     $.ajax({
-      url: '/causes/templates/all',
+      url: '/templates/all',
       dataType: 'json',
       cache: false,
       success: function(response) {
@@ -187,7 +187,7 @@ var CausesView = React.createClass({
       resultPhoto: null
     });
 
-    var requestUrl = '/causes/templates/' + this.state.templateId
+    var requestUrl = '/templates/' + this.state.templateId
       + '/fbId/' + this.state.fbId;
     $.ajax({
       url: requestUrl,
