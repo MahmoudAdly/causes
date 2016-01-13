@@ -79,7 +79,7 @@ var FacebookAuth = React.createClass({
       welcomeMsg = React.createElement(
         'p',
         null,
-        'Please login with your Facebook account to load your profile picture. Be sure we store no data about you.'
+        'Please login with your Facebook account to use your profile picture. Be sure we store no data about you.'
       );
     }
     return React.createElement(

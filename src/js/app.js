@@ -69,7 +69,7 @@ var FacebookAuth = React.createClass({
         Choose one of the templates below and click 'Create' to create a
         download link for your new profile picture.</p>
     } else {
-      welcomeMsg = <p>Please login with your Facebook account to load your profile picture.
+      welcomeMsg = <p>Please login with your Facebook account to use your profile picture.
         Be sure we store no data about you.</p>;
     }
     return (
@@ -131,7 +131,7 @@ var TemplateSelect = React.createClass({
     // This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
     componentHandler.upgradeDom();
   },
-  
+
   onSelectionChanged: function (e) {
     this.props.onTemplateSelected(e.currentTarget.value);
   },
