@@ -127,6 +127,11 @@ var TemplateSelect = React.createClass({
     });
   },
 
+  componentDidUpdate: function() {
+    // This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
+    componentHandler.upgradeDom();
+  },
+  
   onSelectionChanged: function (e) {
     this.props.onTemplateSelected(e.currentTarget.value);
   },
@@ -147,10 +152,14 @@ var TemplateSelect = React.createClass({
                     style={imageStyle}></div>
                     <div className="mdl-card__actions">
                     <span className="template-card-image__filename">
-                      <input type="radio" name="template"
-                        value={template.id} id={"template"+template.id}
-                        onChange={this.onSelectionChanged}/>
-                        <label htmlFor={"template"+template.id}>{template.title}</label>
+                      <label
+                        className="mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                        htmlFor={"template"+template.id}>
+                        <input type="radio" id={"template"+template.id}
+                          className="mdl-radio__button" name="template"
+                          value={template.id} onChange={this.onSelectionChanged}/>
+                        <span className="mdl-radio__label">{template.title}</span>
+                      </label>
                     </span>
                   </div>
                 </div>

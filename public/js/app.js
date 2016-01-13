@@ -156,6 +156,11 @@ var TemplateSelect = React.createClass({
     });
   },
 
+  componentDidUpdate: function componentDidUpdate() {
+    // This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
+    componentHandler.upgradeDom();
+  },
+
   onSelectionChanged: function onSelectionChanged(e) {
     this.props.onTemplateSelected(e.currentTarget.value);
   },
@@ -183,13 +188,19 @@ var TemplateSelect = React.createClass({
               React.createElement(
                 'span',
                 { className: 'template-card-image__filename' },
-                React.createElement('input', { type: 'radio', name: 'template',
-                  value: template.id, id: "template" + template.id,
-                  onChange: this.onSelectionChanged }),
                 React.createElement(
                   'label',
-                  { htmlFor: "template" + template.id },
-                  template.title
+                  {
+                    className: 'mdl-radio mdl-js-radio mdl-js-ripple-effect',
+                    htmlFor: "template" + template.id },
+                  React.createElement('input', { type: 'radio', id: "template" + template.id,
+                    className: 'mdl-radio__button', name: 'template',
+                    value: template.id, onChange: this.onSelectionChanged }),
+                  React.createElement(
+                    'span',
+                    { className: 'mdl-radio__label' },
+                    template.title
+                  )
                 )
               )
             )
