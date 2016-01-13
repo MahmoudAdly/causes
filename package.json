@@ -1,7 +1,7 @@
 {
   "name": "causes",
   "version": "1.0.0",
-  "description": "",
+  "description": "Support a cause with Your Profile Picture",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
