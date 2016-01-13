@@ -2,33 +2,7 @@ var restify = require('restify');
 var fs = require('fs');
 var request = require('request');
 var Jimp = require('jimp');
-
-const templates = [
-  {
-    id: 1,
-    title: 'Palestine Flag',
-    photo: '/public/templates/flag-palestine.png',
-    thumb: '/public/templates/flag-palestine-thumb.png'
-  },
-  {
-    id: 2,
-    title: 'Syria Flag',
-    photo: '/public/templates/flag-syria.png',
-    thumb: '/public/templates/flag-syria-thumb.png'
-  },
-  {
-    id: 3,
-    title: 'Save Madaya EN',
-    photo: '/public/templates/save-madaya-en.png',
-    thumb: '/public/templates/save-madaya-en-thumb.png'
-  },
-  {
-    id: 4,
-    title: 'Save Madaya AR',
-    photo: '/public/templates/save-madaya-ar.png',
-    thumb: '/public/templates/save-madaya-ar-thumb.png'
-  }
-];
+var templates = require('./templates')
 
 function download(url, filename, callback) {
     var photoStream = fs.createWriteStream(filename);
